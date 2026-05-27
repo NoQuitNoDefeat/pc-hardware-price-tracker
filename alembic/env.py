@@ -8,6 +8,7 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from app.database import DATABASE_URL, Base
+import app.models  # noqa: F401 -- importing registers ORM tables on Base.metadata
 
 config = context.config
 

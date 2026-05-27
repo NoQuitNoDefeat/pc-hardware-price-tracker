@@ -303,7 +303,7 @@ Stored as strings in DB for portability + Alembic friendliness; validated in ser
   - `idx_tracked_offers_status (status)`.
   - `idx_tracked_offers_last_checked_at (last_checked_at)`.
 - `price_snapshots`:
-  - `idx_price_snapshots_offer_captured (tracked_offer_id, captured_at DESC)` — primary query path.
+  - `idx_price_snapshots_offer_captured (tracked_offer_id, captured_at)` — primary query path. MVP intentionally uses a plain composite index (no `DESC`) for SQLite/Alembic portability — a DESC index here caused Alembic to detect a spurious schema diff on subsequent `check` runs. DESC ordering can be revisited later if latest-price query performance actually requires it.
   - `idx_price_snapshots_source_type (source_type)`.
 
 ### 7.3 Why `url_key` and not `original_url` for uniqueness
